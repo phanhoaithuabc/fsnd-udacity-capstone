@@ -1,16 +1,17 @@
-# fsnd-udacity-capstone
+# fsnd udacity capstone restaurant management
 
 ## Motivation for the project
 
-The application will help:
-1. Display graphics representing the ratios of ingredients in each drink.
-2. Allow public users to view drink names and graphics.
-3. Allow the shop baristas to see the recipe information.
-4. Allow the shop managers to create new drinks and edit existing drinks.
+The application will help manage restaurant:
+1. Allow chef and manager to list all food in restaurant DB.
+2. Allow chef and manager to view the ingredients in each food.
+3. Allow the managers to delete food in restaurant DB.
+4. Allow the managers to add new food into restaurant DB.
+5. Allow the managers to modify existing food in restaurant DB.
 
 ## URL location for the hosted API
 
-You can access this project [here](http://..)
+You can access this project [here](https://fsnd-udacity-capstone.onrender.com/)
 
 ## Run this project
 
@@ -54,50 +55,12 @@ You will need to provide detailed documentation of your API endpoints including 
 - Request Arguments: None
 - Results: A json contain drinks
 
-<!-- ```javascript
-{
-  "categories": {
-    "1": "Science", 
-    "2": "Art", 
-    "3": "Geography", 
-    "4": "History", 
-    "5": "Entertainment", 
-    "6": "Sports"
-  }, 
-  "success": True
-}
-``` -->
-
 `GET /drinks-detail`
 
 - Fetches a drink detail
 - Request Arguments: None
 - Results: A json contain drink detail
 
-  <!-- ```javascript
-  {
-    "success": True,
-    "questions": [
-      {
-        "id": 5,
-        "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?",
-        "answer": "Maya Angelou",
-        "difficulty": 2,
-        "category": 4
-      }
-    ],
-    "totalQuestions": 19,
-    "categories": {
-      "1": "Science",
-      "2": "Art",
-      "3": "Geography",
-      "4": "History",
-      "5": "Entertainment",
-      "6": "Sports"
-    },
-    "currentCategory": "History"
-  }
-  ``` -->
 
 `DELETE /drinks/{id}`
 
@@ -127,24 +90,6 @@ You will need to provide detailed documentation of your API endpoints including 
   ```
 - Result: Result of that drink we just add
 
-  <!-- ```javascript
-  {
-    "success": true, 
-    "created": 24, 
-    "questions": [
-      {
-        "answer": "Maya Angelou",
-        "category": "4", 
-        "difficulty": 2, 
-        "id": 5, 
-        "question": "Whose autobiography is entitled 'I Know Why the Caged Bird Sings'?"
-      }, 
-      .....
-    ], 
-    "total_questions": 19
-  }
-  ``` -->
-
 `PATCH /drinks/{id}`
 
 - Update the exist drink in database
@@ -155,17 +100,3 @@ You will need to provide detailed documentation of your API endpoints including 
   }
   ```
 - results: The drink to update
-
-  <!-- ```javascript
-  {
-    "question": {
-      "answer": "100", 
-      "category": "3", 
-      "difficulty": 1, 
-      "id": 24, 
-      "question": "How much?"
-    }, 
-    "success": True,
-    "previousQuestion": 1
-  }
-  ``` -->

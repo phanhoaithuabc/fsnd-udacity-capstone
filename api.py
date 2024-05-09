@@ -7,10 +7,10 @@ from flask_cors import CORS
 from .database.models import db_drop_and_create_all, setup_db, Drink
 from .auth.auth import AuthError, requires_auth
 
-AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN', 'dev-pymoihmq0rk6nxgx.us.auth0.com')
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
 ALGORITHMS = ['RS256']
-API_AUDIENCE = os.environ.get('API_AUDIENCE', 'Udacity-Identity-Access-Coffee-Shop')
-CLIENT_ID = os.environ.get('CLIENT_ID', '...')
+API_AUDIENCE = os.environ.get('API_AUDIENCE')
+CLIENT_ID = os.environ.get('CLIENT_ID')
 
 api = Blueprint('api', __name__)
 app = Flask(__name__)
