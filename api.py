@@ -29,6 +29,9 @@ CORS(app)
 
 @api.route('/login')
 def login():
+    print('https://' + AUTH0_DOMAIN + '/authorize?audience=' + API_AUDIENCE + \
+                    '&response_type=code&client_id=' + CLIENT_ID + '&redirect_uri=' + \
+                        request.host_url + 'login-results')
     return redirect('https://' + AUTH0_DOMAIN + '/authorize?audience=' + API_AUDIENCE + \
                     '&response_type=code&client_id=' + CLIENT_ID + '&redirect_uri=' + \
                         request.host_url + 'login-results')
@@ -245,5 +248,5 @@ def authentication_failed(error):
         "message": "Authentication Failed"
     }), 403
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, debug=True)
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=8080, debug=True)
