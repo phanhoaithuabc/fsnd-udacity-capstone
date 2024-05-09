@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "9bf5a24c-094b-4152-a990-48b49df85caf",
-		"name": "udacity-fsnd-udaspicelatte",
+		"_postman_id": "31c7a088-0078-45e7-93d0-3d53e4c6a1a2",
+		"name": "udacity-fsnd-capstone-restaurant-management",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "9392657"
 	},
@@ -10,7 +10,7 @@
 			"name": "public",
 			"item": [
 				{
-					"name": "/drinks",
+					"name": "/foods",
 					"event": [
 						{
 							"listen": "test",
@@ -20,9 +20,9 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"value contains drinks array\", function () {",
+									"pm.test(\"value contains foods array\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.drinks).to.be.an('array')",
+									"    pm.expect(jsonData.foods).to.be.an('array')",
 									"});"
 								],
 								"type": "text/javascript"
@@ -33,19 +33,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks",
+							"raw": "{{host}}/foods",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks"
+								"foods"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/drinks-detail",
+					"name": "/foods-ingredient",
 					"event": [
 						{
 							"listen": "test",
@@ -63,19 +63,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks-detail",
+							"raw": "{{host}}/foods-ingredient",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks-detail"
+								"foods-ingredient"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/drinks",
+					"name": "/foods",
 					"event": [
 						{
 							"listen": "test",
@@ -93,19 +93,19 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks",
+							"raw": "{{host}}/foods",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks"
+								"foods"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/drinks/1",
+					"name": "/foods/1",
 					"event": [
 						{
 							"listen": "test",
@@ -123,12 +123,12 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks/1",
+							"raw": "{{host}}/foods/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks",
+								"foods",
 								"1"
 							]
 						}
@@ -136,7 +136,7 @@
 					"response": []
 				},
 				{
-					"name": "/drinks/1",
+					"name": "/foods/1",
 					"event": [
 						{
 							"listen": "test",
@@ -154,12 +154,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks/1",
+							"raw": "{{host}}/foods/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks",
+								"foods",
 								"1"
 							]
 						}
@@ -172,7 +172,7 @@
 			"name": "barista",
 			"item": [
 				{
-					"name": "/drinks",
+					"name": "/foods",
 					"event": [
 						{
 							"listen": "test",
@@ -182,9 +182,9 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"value contains drinks array\", function () {",
+									"pm.test(\"value contains foods array\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.drinks).to.be.an('array')",
+									"    pm.expect(jsonData.foods).to.be.an('array')",
 									"});"
 								],
 								"type": "text/javascript"
@@ -195,19 +195,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks",
+							"raw": "{{host}}/foods",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks"
+								"foods"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/drinks-detail",
+					"name": "/foods-ingredient/",
 					"event": [
 						{
 							"listen": "test",
@@ -217,7 +217,8 @@
 									"    pm.response.to.have.status(200);",
 									"});"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -225,19 +226,20 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks-detail",
+							"raw": "{{host}}/foods-ingredient/",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks-detail"
+								"foods-ingredient",
+								""
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/drinks",
+					"name": "/foods",
 					"event": [
 						{
 							"listen": "test",
@@ -265,19 +267,19 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks",
+							"raw": "{{host}}/foods",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks"
+								"foods"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/drinks/1",
+					"name": "/foods/1",
 					"event": [
 						{
 							"listen": "test",
@@ -295,12 +297,12 @@
 						"method": "PATCH",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks/1",
+							"raw": "{{host}}/foods/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks",
+								"foods",
 								"1"
 							]
 						}
@@ -308,7 +310,7 @@
 					"response": []
 				},
 				{
-					"name": "/drinks/1",
+					"name": "/foods/1",
 					"event": [
 						{
 							"listen": "test",
@@ -326,12 +328,12 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks/1",
+							"raw": "{{host}}/foods/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks",
+								"foods",
 								"1"
 							]
 						}
@@ -374,7 +376,7 @@
 			"name": "manager",
 			"item": [
 				{
-					"name": "/drinks",
+					"name": "/foods",
 					"event": [
 						{
 							"listen": "test",
@@ -384,9 +386,9 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"value contains drinks array\", function () {",
+									"pm.test(\"value contains foods array\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.drinks).to.be.an('array')",
+									"    pm.expect(jsonData.foods).to.be.an('array')",
 									"});"
 								],
 								"type": "text/javascript"
@@ -397,19 +399,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks",
+							"raw": "{{host}}/foods",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks"
+								"foods"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/drinks-detail",
+					"name": "/foods-ingredient",
 					"event": [
 						{
 							"listen": "test",
@@ -419,9 +421,9 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"value contains drinks array\", function () {",
+									"pm.test(\"value contains foods array\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.drinks).to.be.an('array')",
+									"    pm.expect(jsonData.foods).to.be.an('array')",
 									"});"
 								],
 								"type": "text/javascript"
@@ -432,19 +434,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks-detail",
+							"raw": "{{host}}/foods-ingredient",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks-detail"
+								"foods-ingredient"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/drinks",
+					"name": "/foods",
 					"event": [
 						{
 							"listen": "test",
@@ -464,29 +466,27 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Water3\",\n    \"recipe\": {\n        \"name\": \"Water\",\n        \"color\": \"blue\",\n        \"parts\": 1\n    }\n}"
+							"raw": "{\n    \"title\": \"Miso-Butter Roast Chicken With Acorn Squash Panzanella 3\",\n    \"ingredient\": \"whole chicken, 2¾ tsp. kosher salt, divided, plus more, 2 small acorn squash\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/drinks",
+							"raw": "{{host}}/foods",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks"
+								"foods"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "/drinks/1",
+					"name": "/foods/1",
 					"event": [
 						{
 							"listen": "test",
@@ -496,9 +496,9 @@
 									"    pm.response.to.have.status(200);",
 									"});",
 									"",
-									"pm.test(\"value contains drinks array\", function () {",
+									"pm.test(\"value contains foods array\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.drinks).to.be.an('array')",
+									"    pm.expect(jsonData.foods).to.be.an('array')",
 									"});"
 								],
 								"type": "text/javascript",
@@ -511,22 +511,20 @@
 						"header": [
 							{
 								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
+								"value": "application/json"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Water7\"\n}"
+							"raw": "{\n    \"title\": \"Miso-Butter Roast Chicken With Acorn Squash Panzanella 2\"\n}"
 						},
 						"url": {
-							"raw": "{{host}}/drinks/2",
+							"raw": "{{host}}/foods/2",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks",
+								"foods",
 								"2"
 							]
 						}
@@ -534,7 +532,7 @@
 					"response": []
 				},
 				{
-					"name": "/drinks/1",
+					"name": "/foods/1",
 					"event": [
 						{
 							"listen": "test",
@@ -553,13 +551,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/drinks/5",
+							"raw": "{{host}}/foods/1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"drinks",
-								"5"
+								"foods",
+								"1"
 							]
 						}
 					},
@@ -571,7 +569,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVBZENBSFE3NER2VXVMRHlJa3ViXyJ9.eyJpc3MiOiJodHRwczovL2Rldi1weW1vaWhtcTByazZueGd4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NjM1ZTc0ZDRjOGZkZmNkMTU1MmQ2NjgiLCJhdWQiOiJVZGFjaXR5LUlkZW50aXR5LUFjY2Vzcy1Db2ZmZWUtU2hvcCIsImlhdCI6MTcxNDg4ODkwNCwiZXhwIjoxNzE0ODk2MTA0LCJzY29wZSI6IiIsImF6cCI6IlZJcXlTeWZoaU5zQWc4NmtqYmNzUXFXSGpiREF2bWtOIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmRyaW5rcyIsImdldDpkcmlua3MiLCJnZXQ6ZHJpbmtzLWRldGFpbCIsInBhdGNoOmRyaW5rcyIsInBvc3Q6ZHJpbmtzIl19.HKel4wQbfvPoWIKys3qVLsJB3jNeBv4WblFD87uMmnF4q6bEEgE6nwM74os1BcOrN-WBQyVsMw1LdY92JR3alXrk5gv3_iZTG6bXn56mnHa9RZLS6mIzEJv_UgieSBd9x2koCvNiba591HHUgKRjalT1xzUiZ3SELy-hHau9kv0_m2iTBkNNoVrKBBYBEQy-4cqnN7cL6VHlJ-5HzGGRJ1wR4CvTXQSpFiKzEvtppXGHOGNrvie4a_9Azd7ZzvrQ5gXGKHNmRc0hzRKdUHENyqzcRGiAJ2d4joKknwmCBRgTIESp0ecVIKb1RzUslIUcdItModDFkpP_OYStvP7FSQ",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImVBZENBSFE3NER2VXVMRHlJa3ViXyJ9.eyJpc3MiOiJodHRwczovL2Rldi1weW1vaWhtcTByazZueGd4LnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NjNjNTAyMGNlNjRjY2RiN2Q1MTIzZTciLCJhdWQiOiJVZGFjaXR5LUNhcHN0b25lLVJlc3RhdXJhbnQtTWFuYWdlciIsImlhdCI6MTcxNTIzOTIwMCwiZXhwIjoxNzE1MjQ2NDAwLCJzY29wZSI6IiIsImF6cCI6ImRYazNQT0kxb0RtcW1EaTdLQVN4ZlUxWGJwTEpmMVNOIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlOmZvb2RzIiwiZ2V0OmZvb2RzIiwiZ2V0OmZvb2RzLWluZ3JlZGllbnQiLCJwYXRjaDpmb29kcyIsInBvc3Q6Zm9vZHMiXX0.bA3hdYC3-meVZQLraZ78BLQgt9-XsjwEr2s2bBzbhSosYy8pqtlfNomSiGeSWAni43bye7drefNsrR_URZlQSx_eekRPMKrXCo5ORrONXd-60kITGhYV0d-_hhNLlYwIYJ48bNwDUYnrst-ySHnIaxMGJTaWmhI9G4-vUdkdPMayE9o-P3SXmtPiAnVfLISQ1IxjCfgWqkjqj613HgXyN-uX1svBjtndX0OCNl0iyWy07iALwUwochM1w2QFahclsKhh3e3_dl8zkszbzMcRjLTNSsqtQ5SLfup5C7d47iA91mKMzMay1651isFOI0EnGknJlM2P4Yx7QRonDnDgww",
 						"type": "string"
 					}
 				]

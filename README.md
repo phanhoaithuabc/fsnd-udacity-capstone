@@ -12,6 +12,12 @@ The application will help manage restaurant:
 ## URL location for the hosted API
 
 You can access this project [here](https://fsnd-udacity-capstone.onrender.com/)
+1. login with chef: 
+- username: chef1@gmail.com
+- password: 12345678Ab@
+2. login with manager:
+- username: manager1@gmail.com
+- password: 12345678Ab@
 
 ## Run this project
 
@@ -28,44 +34,44 @@ export FLASK_APP=api.py
 python -m flask run
 ```
 
-## Hosting instructions
+<!-- ## Hosting instructions -->
 
 
 ## Documentation For Backend Endpoint
 
 ### There are 2 Roles:
 
-1. Barista role:
-    - GET:drinks: Can see all drinks
-    - GET:drinks-detail: Can see drinks detail
+1. Chef role:
+    - GET:foods: Can list all foods with title
+    - GET:foods-ingredient: Can list foods with title and detail ingredient
 2. Manager role:
-    - GET:drinks: Can see all drinks
-    - GET:drinks-detail: Can see drinks detail
-    - DELETE:drinks: Can remove drinks from database
-    - PATCH:drinks: Can edit existing drinks from DB
-    - POST:drinks: Can create new drinks
+    - GET:foods: Can list all foods with title
+    - GET:foods-ingredient: Can list foods with title and detail ingredient
+    - DELETE:foods: Can remove foods from database
+    - PATCH:foods: Can edit existing foods from DB
+    - POST:foods: Can create new foods
 
 ### There are 5 API:
 
 You will need to provide detailed documentation of your API endpoints including the URL, request parameters, and the response body. Use the example below as a reference.
 
-`GET /drinks`
+`GET /foods`
 
-- Fetches a list of drinks
+- Fetches a list of foods
 - Request Arguments: None
-- Results: A json contain drinks
+- Results: A json contain foods with title
 
-`GET /drinks-detail`
+`GET /foods-ingredient`
 
-- Fetches a drink detail
+- Fetches a foods detail
 - Request Arguments: None
-- Results: A json contain drink detail
+- Results: A json contain foods with detail ingredient
 
 
-`DELETE /drinks/{id}`
+`DELETE /foods/{id}`
 
-- Deletes drink of the given ID if it exists
-- Results: drink's ID after delete
+- Delete foods of the given ID if it exists
+- Results: food's ID after delete
 
   ```javascript
   {
@@ -74,29 +80,25 @@ You will need to provide detailed documentation of your API endpoints including 
   }
   ```
 
-`POST /drinks`
+`POST /foods`
 
-- Sends a post request to add a new drinks into DB.
-- Request Body:
-  ```javascript
-    {
-        "title": "Water3",
-        "recipe": {
-            "name": "Water",
-            "color": "blue",
-            "parts": 1
-        }
-    }
-  ```
-- Result: Result of that drink we just add
-
-`PATCH /drinks/{id}`
-
-- Update the exist drink in database
+- Sends a post request to add a new foods into DB.
 - Request Body:
   ```javascript
   {
-    "title": "Water7"
+    "title": "Miso-Butter Roast Chicken With Acorn Squash Panzanella",
+    "ingredient": "whole chicken, 2¾ tsp. kosher salt, divided, plus more, 2 small acorn squash"
   }
   ```
-- results: The drink to update
+- Result: Result of that foods we just add
+
+`PATCH /foods/{id}`
+
+- Update the exist foods in database
+- Request Body:
+  ```javascript
+  {
+    "title": "Thanksgiving Mac and Cheese"
+  }
+  ```
+- results: The foods to update

@@ -1,10 +1,9 @@
 import os
-from flask import Flask, request, jsonify, abort, redirect, Blueprint
-from sqlalchemy import exc
+from flask import Flask, request, jsonify, redirect
 import json
 from flask_cors import CORS
 
-from models import db_drop_and_create_all, setup_db, Drink
+from models import create_db_with_data, setup_db, Food
 from auth import AuthError, requires_auth
 
 AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
@@ -12,110 +11,75 @@ ALGORITHMS = ['RS256']
 API_AUDIENCE = os.environ.get('API_AUDIENCE')
 CLIENT_ID = os.environ.get('CLIENT_ID')
 
-api = Blueprint('api', __name__)
+# api = Blueprint('api', __name__)
 app = Flask(__name__)
-setup_db(app)
-CORS(app)
-
-'''
-@TODO uncomment the following line to initialize the datbase
-!! NOTE THIS WILL DROP ALL RECORDS AND START YOUR DB FROM SCRATCH
-!! NOTE THIS MUST BE UNCOMMENTED ON FIRST RUN
-!! Running this funciton will add one
-'''
-# db_drop_and_create_all()
+with app.app_context():
+    setup_db(app)
+    CORS(app)
+    # create_db_with_data()
 
 # ROUTES
 
-@api.route('/login')
+@app.route('/login')
 def login():
-    print('https://' + AUTH0_DOMAIN + '/authorize?audience=' + API_AUDIENCE + \
-                    '&response_type=code&client_id=' + CLIENT_ID + '&redirect_uri=' + \
-                        request.host_url + 'login-results')
     return redirect('https://' + AUTH0_DOMAIN + '/authorize?audience=' + API_AUDIENCE + \
-                    '&response_type=code&client_id=' + CLIENT_ID + '&redirect_uri=' + \
-                        request.host_url + 'login-results')
+                    '&response_type=token&client_id=' + CLIENT_ID + '&redirect_uri=' + \
+                        request.host_url + 'foods')
 
-'''
-@TODO implement endpoint
-    GET /drinks
-        it should be a public endpoint
-        it should contain only the drink.short() data representation
-    returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
-        or appropriate status code indicating reason for failure
-'''
-@app.route('/drinks', methods=['GET'])
-@requires_auth('get:drinks')
-def get_all_drinks(payload):
+@app.route('/foods', methods=['GET'])
+@requires_auth('get:foods')
+def get_all_foods(payload):
     try:
-        drinks = Drink.query.order_by(Drink.id).all()
-        # result = list()
-        # for drink in drinks:
-        #     result.append(drink.short())
-        result = [drink.long() for drink in drinks]
+        foods = Food.query.order_by(Food.id).all()
+        result = [food.just_title() for food in foods]
         return jsonify({
             'success': True,
-            'drinks': result
+            'foods': result
         })
-    except ValueError as e:
+    except Exception as e:
+        print("error", e)
         return jsonify({
             'success': False,
             'error': str(e)
         })
 
 
-'''
-@TODO implement endpoint
-    GET /drinks-detail
-        it should require the 'get:drinks-detail' permission
-        it should contain the drink.long() data representation
-    returns status code 200 and json {"success": True, "drinks": drinks} where drinks is the list of drinks
-        or appropriate status code indicating reason for failure
-'''
-@app.route('/drinks-detail', methods=['GET'])
-@requires_auth('get:drinks-detail')
-def get_drinks_detail(payload):
+@app.route('/foods-ingredient', methods=['GET'])
+@requires_auth('get:foods-ingredient')
+def get_foods_detail(payload):
     try:
-        drinks = Drink.query.order_by(Drink.id).all()
+        foods = Food.query.order_by(Food.id).all()
         result = list()
-        for drink in drinks:
-            result.append(drink.long())
+        for food in foods:
+            result.append(food.full_version())
         return jsonify({
             'success': True,
-            'drinks': result
+            'foods': result
         })
-    except ValueError as e:
+    except Exception as e:
+        print("error", e)
         return jsonify({
             'success': False,
             'error': str(e)
         })
 
 
-'''
-@TODO implement endpoint
-    POST /drinks
-        it should create a new row in the drinks table
-        it should require the 'post:drinks' permission
-        it should contain the drink.long() data representation
-    returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the newly created drink
-        or appropriate status code indicating reason for failure
-'''
-@app.route('/drinks', methods=['POST'])
-@requires_auth('post:drinks')
-def create_drink(payload):
+@app.route('/foods', methods=['POST'])
+@requires_auth('post:foods')
+def create_food(payload):
     try:
         body = request.get_json()
         title = body.get('title')
-        recipe = body.get('recipe')
-        if not (title and recipe):
+        ingredient = body.get('ingredient')
+        if not (title and ingredient):
             raise ValueError('Invalid request body')
         
-        new_drink = Drink(title=title, recipe=json.dumps(recipe))
-        new_drink.insert()
+        new_food = Food(title=title, ingredient=json.dumps(ingredient))
+        new_food.insert()
         
         return jsonify({
             'success': True,
-            'drink': [new_drink.long()]
+            'food': [new_food.full_version()]
         })
     except (KeyError, TypeError, ValueError) as e:
         print("error", e)
@@ -125,73 +89,54 @@ def create_drink(payload):
         })
 
 
-'''
-@TODO implement endpoint
-    PATCH /drinks/<id>
-        where <id> is the existing model id
-        it should respond with a 404 error if <id> is not found
-        it should update the corresponding row for <id>
-        it should require the 'patch:drinks' permission
-        it should contain the drink.long() data representation
-    returns status code 200 and json {"success": True, "drinks": drink} where drink an array containing only the updated drink
-        or appropriate status code indicating reason for failure
-'''
-@app.route('/drinks/<int:drink_id>', methods=['PATCH'])
-@requires_auth('patch:drinks')
-def update_drink(payload, drink_id):
+@app.route('/foods/<int:food_id>', methods=['PATCH'])
+@requires_auth('patch:foods')
+def update_food(payload, food_id):
     try:
         body = request.get_json()
         if not body:
             raise ValueError('Request doesnt have valid JSON body')
         
-        drink_to_update = Drink.query.get(drink_id)
-        if not drink_to_update:
-            raise ValueError('No drink found')
+        food_to_update = Food.query.get(food_id)
+        if not food_to_update:
+            raise ValueError('No foods found')
         
         title = body.get('title')
-        recipe = body.get('recipe')
+        ingredient = body.get('ingredient')
         if title:
-            drink_to_update.title = title
-        if recipe:
-            drink_to_update.recipe = json.dumps(recipe)
-        drink_to_update.update()
+            food_to_update.title = title
+        if ingredient:
+            food_to_update.ingredient = ingredient
+        food_to_update.update()
         
         return jsonify({
             'success': True,
-            'drink': drink_to_update.long()
+            'food': food_to_update.full_version()
         })
-    except (KeyError, TypeError, ValueError) as e:
+    except (KeyError, TypeError, ValueError, Exception) as e:
+        print("error", e)
         return jsonify({
             'success': False,
             'error': str(e)
         })
 
 
-'''
-@TODO implement endpoint
-    DELETE /drinks/<id>
-        where <id> is the existing model id
-        it should respond with a 404 error if <id> is not found
-        it should delete the corresponding row for <id>
-        it should require the 'delete:drinks' permission
-    returns status code 200 and json {"success": True, "delete": id} where id is the id of the deleted record
-        or appropriate status code indicating reason for failure
-'''
-@app.route('/drinks/<int:drink_id>', methods=['DELETE'])
-@requires_auth('delete:drinks')
-def delete_drink(payload, drink_id):
+@app.route('/foods/<int:food_id>', methods=['DELETE'])
+@requires_auth('delete:foods')
+def delete_food(payload, food_id):
     try:
-        drink_to_delete = Drink.query.get(drink_id)
-        if not drink_to_delete:
-            raise ValueError('Drink ID {} not found'.format(drink_id))
+        food_to_delete = Food.query.get(food_id)
+        if not food_to_delete:
+            raise ValueError('Food ID {} not found'.format(food_id))
         
-        drink_to_delete.delete()
+        food_to_delete.delete()
         
         return jsonify({
             'success': True,
-            'delete': drink_id
+            'delete': food_id
         })
     except (ValueError, Exception) as e:
+        print("error", e)
         return jsonify({
             'success': False,
             'error': str(e)
@@ -212,21 +157,6 @@ def unprocessable(error):
     }), 422
 
 
-'''
-@TODO implement error handlers using the @app.errorhandler(error) decorator
-    each error handler should return (with approprate messages):
-             jsonify({
-                    "success": False,
-                    "error": 404,
-                    "message": "resource not found"
-                    }), 404
-
-'''
-
-'''
-@TODO implement error handler for 404
-    error handler should conform to general task above
-'''
 @app.errorhandler(404)
 def resource_not_found(error):
     return jsonify({
@@ -236,10 +166,6 @@ def resource_not_found(error):
     }), 404
 
 
-'''
-@TODO implement error handler for AuthError
-    error handler should conform to general task above
-'''
 @app.errorhandler(AuthError)
 def authentication_failed(error):
     return jsonify({
