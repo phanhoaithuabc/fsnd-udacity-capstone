@@ -11,13 +11,13 @@ The application will help manage restaurant:
 
 ## URL location for the hosted API
 
-You can access this project [here](https://fsnd-udacity-capstone.onrender.com/)
+You can access this project [here](http://54.80.63.176:5000/login)
 1. login with chef: 
-- username: chef1@gmail.com
-- password: 12345678Ab@
+    - username: chef1@gmail.com
+    - password: 12345678Ab@
 2. login with manager:
-- username: manager1@gmail.com
-- password: 12345678Ab@
+    - username: manager1@gmail.com
+    - password: 12345678Ab@
 
 ## Run this project
 
