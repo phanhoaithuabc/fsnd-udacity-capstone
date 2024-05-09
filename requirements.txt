@@ -43,4 +43,3 @@ typing-extensions==4.11.0
 urllib3==2.2.1
 Werkzeug==2.2.2
 wrapt==1.11.1
-zipp==3.18.1
